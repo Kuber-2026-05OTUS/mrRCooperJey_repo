@@ -17,6 +17,12 @@ spec:
         - path:
             type: PathPrefix
             value: /homepage
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplaceFullPath
+              replaceFullPath: /index.html
       backendRefs:
         - name: homework-service
           port: 8000
