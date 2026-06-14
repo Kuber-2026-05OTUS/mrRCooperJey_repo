@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homework-config-map
+  namespace: homework
+data:
+  VARIABLE_1: "1"
+  VARIABLE_2: "2"
+  VARIABLE_3: "3"
