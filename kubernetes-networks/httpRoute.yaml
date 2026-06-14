@@ -26,10 +26,25 @@ spec:
       backendRefs:
         - name: homework-service
           port: 8000
+
     - matches:
-        - path:
-            type: PathPrefix
-            value: /
+      - path:
+          type: PathPrefix
+          value: /
       backendRefs:
         - name: homework-service
           port: 8000
+    
+    - matches:
+      - path:
+          type: PathPrefix
+          value: /hello
+      backendRefs:
+        - name: homework-service
+          port: 8000
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplaceFullPath
+              replaceFullPath: /conf/index.html
