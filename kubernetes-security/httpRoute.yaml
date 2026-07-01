@@ -1,0 +1,50 @@
+# mrRCooperJey_repo/kubernetes-networks/httpRoute.yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: homework-httproute
+  labels:
+    app: homework
+  namespace: homework
+spec:
+  parentRefs:
+    - name: homework-gateway
+      namespace: homework
+  hostnames:
+    - "homework.otus"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /homepage
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplaceFullPath
+              replaceFullPath: /index.html
+      backendRefs:
+        - name: homework-service
+          port: 8000
+
+    - matches:
+      - path:
+          type: PathPrefix
+          value: /
+      backendRefs:
+        - name: homework-service
+          port: 8000
+    
+    - matches:
+      - path:
+          type: PathPrefix
+          value: /hello
+      backendRefs:
+        - name: homework-service
+          port: 8000
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplaceFullPath
+              replaceFullPath: /conf/index.html
